@@ -38,7 +38,7 @@ class Actor
 
   def notify(id)
     item = Db.lookup(id)
-    puts "[#{@process_key}] Notified by pair process: #{id}. Looked up row with data: #{item}"
+    puts "[#{@process_key}] Notified by pair process with id: #{id}. Looked up row with data: #{item}"
     pair_process.check_value(item[:value])
   end
 
