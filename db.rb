@@ -19,7 +19,7 @@ class Db
     def insert(value=nil)
       a = ((0..9).to_a + ('a'..'z').to_a).shuffle
       value ||= 10.times.map { a.sample }.join
-      puts value
+      puts "Db insert: #{value}"
       $items.insert(value: value)
     end
 
