@@ -20,24 +20,36 @@ class Actor
   end
 
   def start
-    create_item
+    last_id = create_item
+    notify_other(last_id)
+  end
+
+  def notify_other(id)
+    pair_process.async.notify(id)
+  end
+
+  def notify(id)
+    puts "[#{@process_key}] Notified by pair process: #{id}"
   end
 
   def create_item
     last_id = Db.insert
-    puts "Created item with id: #{last_id}"
+    puts "[#{@process_key}] Created item with id: #{last_id}"
+    last_id
   end
 end
 
-a1 = Actor.new(:a1, :a2)
-a1.register
+alpha = Actor.new(:alpha, :beta)
+alpha.register
 
-a2 = Actor.new(:a2, :a1)
-a2.register
+beta = Actor.new(:beta, :alpha)
+beta.register
 
-a1.start
-a2.start
+alpha.start
+beta.start
 
-loop do
+if $0 == __FILE__
+  loop do
 
+  end
 end
